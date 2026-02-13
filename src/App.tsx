@@ -9,6 +9,7 @@ function App() {
       </p>
       <div className="card">
         <p>Start editing <code>src/App.tsx</code> to build something awesome.</p>
+        <p className="deploy-note">Auto-deployed via Vercel on every push.</p>
       </div>
     </div>
   )

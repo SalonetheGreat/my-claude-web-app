@@ -30,6 +30,12 @@ h1 {
   font-size: 0.9em;
 }
 
+.deploy-note {
+  margin-top: 0.8em;
+  font-size: 0.85em;
+  color: #888;
+}
+
 @media (prefers-color-scheme: light) {
   .card {
     background: rgba(0, 0, 0, 0.03);
