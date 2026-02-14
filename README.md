@@ -1,6 +1,6 @@
 # My Claude Web App
 
-A playground for various demo / test apps, built with React + Vite (TypeScript).
+A playground for various demo / test apps, built with **Expo (React Native)** — runs on iOS, Android, and Web from a single codebase.
 
 ## Live URLs
 
@@ -12,42 +12,58 @@ A playground for various demo / test apps, built with React + Vite (TypeScript).
 ## Deployment Pipeline
 
 ```
-local dev ──push──> GitHub (main) ──auto──> Vercel
+local dev ──push──> GitHub (main) ──auto──> Vercel  (expo export --platform web)
                                   ──auto──> Cloudflare Pages
 ```
 
-Both platforms watch the `main` branch. Every push triggers parallel builds and deployments — no manual steps needed.
+Both platforms watch the `main` branch. Every push triggers parallel builds and deployments.
 
 ## Project Structure
 
 ```
-├── index.html            # Entry HTML
-├── src/
-│   ├── main.tsx          # React entry point
-│   ├── App.tsx           # Root component
-│   ├── App.css           # App styles
-│   ├── index.css         # Global styles
-│   └── assets/           # Static assets (images, etc.)
-├── public/               # Files served as-is (favicon, etc.)
-├── vite.config.ts        # Vite config
-├── tsconfig.json         # TypeScript config
-├── eslint.config.js      # ESLint config
+├── app/
+│   ├── _layout.tsx          # Root layout (navigation + theme)
+│   ├── index.tsx            # Home screen
+│   └── +not-found.tsx       # 404 screen
+├── assets/images/           # App icons, splash screen
+├── components/              # Reusable components (future)
+├── constants/theme.ts       # Color & font tokens
+├── hooks/                   # Custom hooks (useColorScheme, useThemeColor)
+├── scripts/reset-project.js # Reset to blank Expo project
+├── app.json                 # Expo config
+├── eas.json                 # EAS Build profiles
+├── vercel.json              # Vercel deployment config
+├── public/_redirects        # Cloudflare Pages SPA fallback
+├── tsconfig.json            # TypeScript config
+├── eslint.config.js         # ESLint config
 └── package.json
 ```
 
 ## Development
 
 ```bash
-npm install               # Install dependencies
-npm run dev               # Start dev server (http://localhost:5173)
-npm run build             # Production build (output: dist/)
-npm run preview           # Preview production build locally
-npm run lint              # Run ESLint
+npm install                  # Install dependencies
+npx expo start --web         # Start web dev server
+npx expo start --android     # Start Android dev (requires emulator or Expo Go)
+npx expo start --ios         # Start iOS dev (macOS only, or Expo Go)
+npx expo export --platform web  # Production web build (output: dist/)
+npx expo lint                # Run ESLint
+```
+
+## Mobile Builds (EAS)
+
+```bash
+npx eas build --platform android --profile development   # Dev APK
+npx eas build --platform android --profile preview        # Preview APK
+npx eas build --platform android --profile production     # Production AAB
+npx eas build --platform ios --profile development        # Dev IPA (requires Apple account)
 ```
 
 ## Tech Stack
 
-- **Framework**: React 19 + TypeScript
-- **Build tool**: Vite 7
-- **Hosting**: Vercel + Cloudflare Pages (dual deployment)
+- **Framework**: Expo SDK 54 (React Native 0.81 + React 19)
+- **Routing**: Expo Router (file-based)
+- **Language**: TypeScript
+- **Hosting (Web)**: Vercel + Cloudflare Pages (dual deployment)
+- **Mobile Builds**: EAS Build
 - **CI/CD**: GitHub push → auto build & deploy
