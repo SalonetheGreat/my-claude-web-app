@@ -29,6 +29,7 @@ yarn-error.*
 *.pem
 
 # local env files
+.env
 .env*.local
 
 # typescript
@@ -40,6 +41,12 @@ app-example
 # generated native folders
 /ios
 /android
+
+# Cloudflare Worker sub-project
+workers/node_modules/
+workers/dist/
+workers/.wrangler/
+workers/.dev.vars
 
 # Claude
 .claude
