@@ -1,4 +1,5 @@
-import { Platform, StyleSheet, View, Text } from 'react-native';
+import { Platform, StyleSheet, View, Text, Pressable } from 'react-native';
+import { Link } from 'expo-router';
 
 export default function HomeScreen() {
   return (
@@ -15,6 +16,16 @@ export default function HomeScreen() {
           Auto-deployed via Vercel + Cloudflare Pages on every push.
         </Text>
       </View>
+
+      <Link href="/demo/notes" asChild>
+        <Pressable style={styles.demoCard}>
+          <Text style={styles.demoTitle}>Notes Demo</Text>
+          <Text style={styles.demoDescription}>
+            CRUD with Cloudflare Workers (Hono) + Supabase
+          </Text>
+        </Pressable>
+      </Link>
+
       <Text style={styles.platform}>
         Running on: {Platform.OS}
       </Text>
@@ -69,6 +80,26 @@ const styles = StyleSheet.create({
     fontSize: 13,
     color: '#58a6ff',
     fontStyle: 'italic',
+  },
+  demoCard: {
+    backgroundColor: '#161b22',
+    borderRadius: 12,
+    padding: 20,
+    width: '100%',
+    maxWidth: 480,
+    marginTop: 16,
+    borderWidth: 1,
+    borderColor: '#238636',
+  },
+  demoTitle: {
+    fontSize: 17,
+    fontWeight: '600',
+    color: '#58a6ff',
+    marginBottom: 4,
+  },
+  demoDescription: {
+    fontSize: 13,
+    color: '#8b949e',
   },
   platform: {
     marginTop: 24,
